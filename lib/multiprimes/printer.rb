@@ -29,6 +29,7 @@ module Multiprimes
       Terminal::Table::Style.defaults[:alignment] = :right
       @printer = Terminal::Table.new
     end
+
     def render_table
       @printer.add_row @table.top_row
       @printer.add_separator
