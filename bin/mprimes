@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '../'))
+require 'primes'
+include Multiprimes
+
+def display_options
+  print "\nUsage: mprimes --count size\n"
+  print "ie: mprimes --count 10\n\n"
+end
+
+if ARGV.empty?
+  display_options
+else
+  if ARGV.length == 4 && ARGV[0].match(/\-\-count/) && ARGV[2].match(/\-\-generator/)
+    raise ArgumentError.new("Invalid generator") unless generators.keys.include? ARGV[3].downcase.to_sym
+    rows, cols = [ARGV[1], ARGV[1]].collect{|i| i.to_i}
+    Table.new( rows, cols, generators[ARGV[3].downcase.to_sym] ).print
+  else
+    display_options
+  end
+end
